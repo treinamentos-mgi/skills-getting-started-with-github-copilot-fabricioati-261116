@@ -5,7 +5,9 @@ Uma aplicação FastAPI bem simples que permite às pessoas estudantes visualiza
 ## Funcionalidades
 
 - Visualizar todas as atividades extracurriculares disponíveis
+- Consultar a lista de participantes em cada card, atualizada após uma inscrição ou remoção
 - Inscrever-se em atividades
+- Cancelar uma inscrição pelo botão de lixeira ao lado do participante
 
 ## Primeiros passos
 
@@ -25,12 +27,26 @@ Uma aplicação FastAPI bem simples que permite às pessoas estudantes visualiza
    - Documentação da API: http://localhost:8000/docs
    - Documentação alternativa: http://localhost:8000/redoc
 
+Se a página continuar mostrando uma versão antiga após alterações na interface, faça uma
+recarga completa com `Ctrl+Shift+R` (ou `Cmd+Shift+R` no macOS). Reiniciar o servidor não
+limpa o cache do navegador. Ao atualizar o JavaScript ou CSS, atualize também o parâmetro
+`v` nas referências em `static/index.html`.
+
 ## Endpoints da API
 
 | Método | Endpoint                                                          | Descrição                                                              |
 | ------ | ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Retorna todas as atividades com seus detalhes e o número atual de participantes |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Inscreve em uma atividade                                              |
+| DELETE | `/activities/{activity_name}/signup?email=student@mergington.edu` | Cancela uma inscrição; retorna 404 para atividade inexistente e 400 se o participante não estiver inscrito |
+
+## Testes
+
+Na raiz do repositório, execute os testes de cancelamento de inscrição:
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 ## Modelo de dados
 
